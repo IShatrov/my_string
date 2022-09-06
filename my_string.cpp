@@ -174,7 +174,7 @@ ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
         *lineptr = (char*) malloc(1 * sizeof(char));
         if (*lineptr == NULL) return -1;
 
-        *n = 1;
+        *n = 10;
     }
 
     unsigned int ans = 0;
@@ -203,7 +203,7 @@ ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
         ++ans;
     }
 
-    if (*n < ans + 1)
+    if (*n < ans + 1) //check if *lineptr can fit \0
     {
         *lineptr = (char*) realloc(*lineptr, (*n + 1) * sizeof(char));
         if (*lineptr == NULL) return -1;
@@ -215,7 +215,7 @@ ssize_t my_getline(char **lineptr, size_t *n, FILE *stream)
 
     *ptr = '\0';
 
-    if (*n > ans + 1)
+    if (*n > ans + 1) //check if *lineptr has excess space
     {
         *lineptr = (char*) realloc(*lineptr, (ans + 1) * sizeof(char));
         if (*lineptr == NULL) return -1;
